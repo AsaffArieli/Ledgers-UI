@@ -1,0 +1,41 @@
+<template-table [dataSource]="dataSource" [columns]="columns" matSort #sort="matSort">
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column">
+        @if (column === 'select') {
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                    [checked]="selection.hasValue() && selection.selected.length === dataSource.data.length"
+                    [indeterminate]="selection.hasValue() && selection.selected.length !== dataSource.data.length">
+                </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let element">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(element) : null"
+                    [checked]="selection.isSelected(element)">
+                </mat-checkbox>
+            </td>
+        }
+        @else {
+            <th mat-header-cell *matHeaderCellDef>
+                {{ column | uppercase }}
+            </th>
+            <td mat-cell *matCellDef="let element">
+                {{ element[column] }}
+            </td>
+        }
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columns.length">
+            <div [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                &nbsp;<br><br><br>
+            </div>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns;"></tr>
+    <tr mat-row matRipple *matRowDef="let row; columns: columns" class="element-row"
+        [class.expanded-row]="expandedElement === row" (click)="expandedElement = expandedElement === row ? null : row">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="expanded-row"></tr>
+</template-table>
+
+<mat-paginator [pageSizeOptions]="[10, 50, 100]" showFirstLastButtons></mat-paginator>

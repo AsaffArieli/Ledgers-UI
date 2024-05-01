@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Funder</h2>
+<mat-dialog-content>
+    <form [formGroup]="formGroup">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name">
+            <mat-error>Please enter a valid First Name</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Website</mat-label>
+            <input matInput formControlName="website">
+            <mat-error>Please enter a valid SSN</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phone" type="tel" maxlength="10">
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error>Please enter a valid phone number</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error>Please enter a valid email</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="address">
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close (click)="insert()" [disabled]="!formGroup.valid">Create</button>
+</mat-dialog-actions>

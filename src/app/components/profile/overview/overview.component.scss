@@ -1,0 +1,47 @@
+
+.profile-overview {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    &__img {
+        width: fit-content;
+        height: fit-content;
+    }
+
+    &__content {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 10px;
+    }
+}
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-mdc-cell {
+    padding: 0;
+}
+
+.mat-column-category {
+    width: 25px;
+}
+
+mat-card {
+    margin: 3px;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+  }
+  
+  mat-card-content {
+    padding: 0 !important;
+  }
+  
+  mat-form-field {
+    width: 100%;
+}

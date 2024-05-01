@@ -1,0 +1,21 @@
+.parser-settings {
+    width: 100%;
+    height: 100%;
+}
+
+table {
+    width: 100%;
+}
+
+.noDataRow {
+    text-align: center;
+    height: 50px;
+}
+  
+tr.element-row:not(.expanded-row):hover {
+    background: whitesmoke;
+}
+  
+tr.element-row:not(.expanded-row):active {
+    background: #efefef;
+}

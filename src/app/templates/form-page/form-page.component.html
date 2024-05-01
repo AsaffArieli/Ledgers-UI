@@ -1,0 +1,34 @@
+<div class="form-page">
+    <mat-drawer-container hasBackdrop="false" autosize>
+        <mat-drawer #drawer mode="side">
+            <mat-card class="drawer">
+                <mat-card-content>
+                    <ng-content select="page-form"></ng-content>
+                </mat-card-content>
+            </mat-card>
+        </mat-drawer>
+        <mat-drawer-content>
+            <div class="layout">
+                <div class="layout__toolbar">
+                    <mat-card class="spacer">
+                        <mat-card-content>
+                            <div class="layout__buttons">
+                                <button mat-icon-button (click)="drawer.toggle()">
+                                    <mat-icon>filter_list</mat-icon>
+                                </button>
+                                <ng-content select="page-buttons-left"></ng-content>
+                                <span class="spacer"></span>
+                                <ng-content select="page-buttons-right"></ng-content>
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+                    <ng-content select="page-buttons-after"></ng-content>
+                </div>
+                <ng-content select="page-content-top"></ng-content>
+                <div class="layout__content">
+                    <ng-content select="page-content"></ng-content>
+                </div>
+            </div>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>

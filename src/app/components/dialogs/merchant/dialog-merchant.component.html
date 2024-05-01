@@ -1,0 +1,71 @@
+<h2 mat-dialog-title>Merchant</h2>
+<mat-dialog-content>
+    <form [formGroup]="formGroup">
+        <mat-form-field>
+            <mat-label>EIN</mat-label>
+            <input matInput formControlName="ein" type="tel" maxlength="9">
+            <mat-error>Please enter a valid EIN</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Business Legal Name</mat-label>
+            <input matInput formControlName="name">
+            <mat-error>Please enter a valid Business Name</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Industry</mat-label>
+            <mat-select formControlName="industry">
+                @for (group of this.insudries; track group) {
+                    <mat-optgroup [label]="group.category">
+                    @for (industry of group.subCategory; track industry) {
+                        <mat-option [value]="industry.value">{{industry.viewValue}}</mat-option>
+                    }
+                    </mat-optgroup>
+                }
+            </mat-select>
+            <mat-error>Please choose an Industry</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Legal Entity</mat-label>
+            <mat-select formControlName="legal_entity">
+                <mat-option value="llc">Limited liability partnership (LLC)</mat-option>
+                <mat-option value="option2">Option 2</mat-option>
+                <mat-option value="option3">Option 3</mat-option>
+            </mat-select>
+            <mat-error>Please choose an entity</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Start Date</mat-label>
+            <input matInput formControlName="start_date" [matDatepicker]="start_date" placeholder="MM/DD/YYYY">
+            <mat-datepicker-toggle matIconSuffix [for]="start_date"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #start_date></mat-datepicker>
+            <mat-error>Please enter a valid date</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Company Phone</mat-label>
+            <input matInput formControlName="phone" type="tel" maxlength="10">
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error>Please enter a valid phone number</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Company Mail</mat-label>
+            <input matInput formControlName="email">
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="formGroup.controls.email.invalid && formGroup.controls.email.untouched">Please enter a valid email</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Company Website</mat-label>
+            <input matInput formControlName="website">
+            <mat-icon matSuffix>web</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="full">
+            <mat-label>Company Address</mat-label>
+            <input matInput formControlName="address">
+        </mat-form-field>
+        
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close (click)="insert()" [disabled]="!formGroup.valid">Create</button>
+</mat-dialog-actions>

@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>Key</h2>
+<mat-dialog-content>
+    <form [formGroup]="formGroup">
+        <mat-form-field>
+            <mat-label>Parser</mat-label>
+            <mat-select formControlName="parser">
+                <mat-option value="Bank Statement">Bank Statement</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Bank</mat-label>
+            <mat-select multiple formControlName="bank">
+                <mat-select-trigger>
+                    {{(formGroup.get('bank').value?.[0] | uppercase) || ''}}
+                    @if ((formGroup.get('bank').value?.length || 0) > 1) {
+                      <span>
+                        (+{{(formGroup.get('bank').value?.length || 0) - 1}} {{formGroup.get('bank').value?.length === 2 ? 'other' : 'others'}})
+                      </span>
+                    }
+                  </mat-select-trigger>
+                @for (scheme of schemes | async; track $index) {
+                    <mat-option [value]="scheme.id">{{ scheme.bank | uppercase }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Type</mat-label>
+            <mat-select formControlName="type">
+                    <mat-option value="funder">FUNDER</mat-option>
+                    <mat-option value="transfer">TRANSFER</mat-option>
+                    <mat-option value="credit">CREDIT</mat-option>
+                    <mat-option value="pull">PULL</mat-option>
+            </mat-select>
+        </mat-form-field>
+        @if(formGroup.get('type').value === 'funder') {
+            <mat-form-field class="large">
+                <mat-label>Funder</mat-label>
+                <mat-select multiple formControlName="funder">
+                    <mat-select-trigger>
+                        {{(formGroup.get('funder').value?.[0] | uppercase) || ''}}
+                        @if ((formGroup.get('funder').value?.length || 0) > 1) {
+                          <span>
+                            (+{{(formGroup.get('funder').value?.length || 0) - 1}} {{formGroup.get('funder').value?.length === 2 ? 'other' : 'others'}})
+                          </span>
+                        }
+                      </mat-select-trigger>
+                    @for (funder of funders | async; track $index) {
+                        <mat-option [value]="funder.id">{{ funder.name | uppercase }}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        }
+        
+        <mat-form-field [ngClass]="formGroup.get('type').value === 'funder' ? 'large' : 'full'">
+            <mat-label>Pattern</mat-label>
+            <input matInput formControlName="pattern">
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close (click)="insert()" [disabled]="!formGroup.valid">Create</button>
+</mat-dialog-actions>

@@ -1,0 +1,144 @@
+<form *ngIf="form" [formGroup]="form" class="form">
+    <div class="form__field">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Group By</mat-label>
+            <mat-select formControlName="group" hideSingleSelectionIndicator="true">
+                @for (option of groupOptions; track $index) {
+                <mat-option [value]="option">{{ option | uppercase }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="form__field">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <mat-label>Sort By</mat-label>
+            <mat-select formControlName="sort" (selectionChange)="fieldChange()"
+                hideSingleSelectionIndicator="true">
+                @for (option of sortOptions; track $index) {
+                <mat-option [value]="option">{{ option | uppercase }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="form__field">
+        <button mat-mini-fab (click)="form.get('order').setValue(!form.get('order').value)" (click)="fieldChange()">
+            <mat-icon>
+                @if (!form.get('order').value) {
+                keyboard_arrow_up
+                } @else {
+                keyboard_arrow_down
+                }
+            </mat-icon>
+        </button>
+    </div>
+    <div class="form__filter">
+        <mat-form-field subscriptSizing="dynamic" class="form__filter__rows">
+            <mat-label>Rows</mat-label>
+            <input matInput [value]="resultsLength" [disabled]="true">
+        </mat-form-field>
+        <mat-form-field subscriptSizing="dynamic" class="form__filter__by">
+            <mat-label>Filter By</mat-label>
+            <mat-select formControlName="filterBy" hideSingleSelectionIndicator="true">
+                <mat-option [value]="null">--</mat-option>
+                @for (filter of filterColumns; track $index) {
+                <mat-option [value]="filter">{{ filter | uppercase }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        @if (['amount', 'balance'].includes(form.get('filterBy').value)) {
+        <mat-form-field subscriptSizing="dynamic" class="form__filter__operation">
+            <mat-select formControlName="operation" hideSingleSelectionIndicator="true">
+                @for (op of filterOperations; track $index) {
+                <mat-option [value]="op.value" [matTooltip]="op.tooltip" matTooltipPosition="left">{{ op.value
+                    }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        }
+
+        @if (form.get('filterBy').value === 'date') {
+        <mat-form-field subscriptSizing="dynamic" class="form__filter__input">
+            <mat-label>Filter</mat-label>
+            <mat-date-range-input [rangePicker]="datePicker">
+                <input matStartDate formControlName="startDate" (focus)="datePicker.open()">
+                <input matEndDate formControlName="endDate" (focus)="datePicker.open()">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #datePicker></mat-date-range-picker>
+            @if (form.get('startDate').value && form.get('startDate').value !== '' && form.get('endDate').value &&
+            form.get('endtDate').value !== '') {
+            <button matIconSuffix mat-icon-button (click)="form.get('startDate').setValue(null)"
+                (click)="form.get('endDate').setValue(null)" (click)="$event.stopPropagation()">
+                <mat-icon>close</mat-icon>
+            </button>
+            }
+            <button matIconSuffix mat-icon-button (click)="$event.stopPropagation()">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+        } @else if (form.get('filterBy').value === 'section') {
+        <mat-form-field subscriptSizing="dynamic" class="form__filter__input">
+            <mat-label>Filter</mat-label>
+            <mat-select formControlName="section" (selectionChange)="fieldChange()"
+                hideSingleSelectionIndicator="true">
+                <mat-option value="deposit">DEPOSITS</mat-option>
+                <mat-option value="withdrawal">WITHDRAWALS</mat-option>
+                @for (section of (config | async).sections; track $index) {
+                <mat-option [value]="section">{{ section | uppercase }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        } @else {
+        <mat-form-field subscriptSizing="dynamic" class="form__filter__input">
+            <mat-label>Filter</mat-label>
+            <input matInput formControlName="filter">
+            @if (form.get('filter').value && form.get('filter').value !== '' ) {
+            <button matIconSuffix mat-icon-button (click)="form.get('filter').setValue(null)">
+                <mat-icon>close</mat-icon>
+            </button>
+            }
+            <button matIconSuffix mat-icon-button (click)="form.get('filter').setValue(null)"
+                (click)="$event.stopPropagation()">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+        }
+
+        <mat-form-field subscriptSizing="dynamic" class="form__filter__filters">
+            <mat-label>Filters</mat-label>
+            <mat-select formControlName="filters" hideSingleSelectionIndicator="true">
+                @for (filter of (config | async).filters; track $index) {
+                <mat-option [value]="filter">
+                    @if (filter.column) {
+                    {{ filter.column + ': ' }}
+                    }
+                    @if (filter.operation) {
+                    {{ filter.operation + ' ' }}
+                    }
+                    {{ filter.filter }}
+                </mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="form__field">
+        <button mat-mini-fab matTooltip="Add filter">
+            <mat-icon>layers</mat-icon>
+        </button>
+    </div>
+    <div class="form__field">
+        <button mat-mini-fab matTooltip="Remove filters">
+            <mat-icon>layers_clear</mat-icon>
+        </button>
+    </div>
+    <div class="form__field">
+        <button mat-mini-fab matTooltip="Clear all filters">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+    <div class="form__field">
+        <button mat-mini-fab>
+            <mat-icon>more_vert</mat-icon>
+        </button>
+    </div>
+</form>

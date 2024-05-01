@@ -1,0 +1,48 @@
+<h2 mat-dialog-title>Owner</h2>
+<mat-dialog-content>
+    <form [formGroup]="formGroup">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name">
+            <mat-error>Please enter a valid First Name</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>SSN</mat-label>
+            <input matInput formControlName="ssn" type="tel" maxlength="9">
+            <mat-error>Please enter a valid SSN</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phone" type="tel" maxlength="10">
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error>Please enter a valid phone number</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Mail</mat-label>
+            <input matInput formControlName="email">
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error>Please enter a valid email</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Birth Date</mat-label>
+            <input matInput formControlName="birth_date" [matDatepicker]="birth_date" placeholder="MM/DD/YYYY">
+            <mat-datepicker-toggle matIconSuffix [for]="birth_date"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #birth_date></mat-datepicker>
+            <mat-error>Please enter a valid date</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>FICO</mat-label>
+            <input matInput formControlName="fico">
+            <mat-error>Please enter a valid fico number</mat-error>
+        </mat-form-field>
+        <mat-form-field class="full">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="address">
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close (click)="create()" [disabled]="!formGroup.valid">Create</button>
+</mat-dialog-actions>

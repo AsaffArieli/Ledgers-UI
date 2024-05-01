@@ -1,0 +1,29 @@
+
+form {
+    display: grid;
+    grid-template-columns: repeat(6, 125px);
+    column-gap: 10px;
+}
+
+mat-form-field {
+    grid-column: span 2;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+mat-optgroup {
+    font-weight: bold;
+}
+
+.full {
+    grid-column: span 6;
+}
+
+.large {
+    grid-column: span 3;
+}
+
+.small {
+    grid-column: span 1;
+}

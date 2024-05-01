@@ -1,0 +1,35 @@
+
+table {
+    width: 100%;
+}
+
+td, th {
+    font-size: 17px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.noDataRow {
+    text-align: center;
+    height: 50px;
+}
+
+tr.expanded-row {
+    height: 0;
+}
+  
+tr.element-row:not(.expanded-row):hover {
+    background: whitesmoke;
+}
+  
+tr.element-row:not(.expanded-row):active {
+    background: #efefef;
+}
+
+.cdk-column-expandedDetail {
+    background-color: #f8f8f8;
+    box-shadow:
+    inset 0px 2px 3px -1px rgba(0, 0, 0, 0.15), 
+    inset 0px 3px 4px 0px rgba(0, 0, 0, 0.1), 
+    inset 0px 1px 5px 0px rgba(0, 0, 0, 0.09) !important;
+}

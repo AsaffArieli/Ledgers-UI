@@ -1,0 +1,29 @@
+<div class="parser">
+    <app-form-page>
+        <page-form>
+            <app-parser-form></app-parser-form>
+        </page-form>
+        <page-buttons>
+            <div class="buttons">
+                <button mat-mini-fab matTooltip="Add" class="buttons__button">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <button mat-mini-fab matTooltip="Save" class="buttons__button">
+                    <mat-icon>save</mat-icon>
+                </button>
+                <button mat-mini-fab matTooltip="delete" class="buttons__button">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-mini-fab matTooltip="Refresh" class="buttons__button">
+                    <mat-icon>refresh</mat-icon>
+                </button>
+                <button mat-mini-fab matTooltip="More" class="buttons__button">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
+        </page-buttons>
+        <page-content>
+            <router-outlet></router-outlet>
+        </page-content>
+    </app-form-page>
+</div>

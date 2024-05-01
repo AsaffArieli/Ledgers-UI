@@ -1,0 +1,42 @@
+button {
+    box-shadow: none !important;
+}
+
+.form {
+    display: flex;
+    gap: 7px;
+    padding: 11px 6px;
+    align-items: center;
+    border-bottom: 1px solid rgba(140, 140, 140, 0.55);
+
+    &__filter {
+        display: flex;
+        flex: 1;
+        min-width: 0;
+
+        &__by {
+            flex: 0 0 200px;
+            border-right: 1px solid rgba(85, 85, 85, 0.55);
+        }
+
+        &__input {
+            flex: 1 1 auto;
+            min-width: 0;
+            border-right: 1px solid rgba(85, 85, 85, 0.55);
+        }
+
+        &__rows {
+            flex: 0 0 100px;
+            border-right: 1px solid rgba(85, 85, 85, 0.55);
+        }
+
+        &__operation {
+            flex: 0 0 65px;
+            border-right: 1px solid rgba(85, 85, 85, 0.55);
+        }
+
+        &__filters {
+            flex: 0 0 200px;
+        }
+    }
+}

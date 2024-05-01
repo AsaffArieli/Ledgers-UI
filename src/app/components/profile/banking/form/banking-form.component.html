@@ -1,0 +1,69 @@
+<div class="profile-banking-form">
+    <div class="form">
+        <div class="form__item form__input">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>View</mat-label>
+                <mat-select [formControl]="viewControl" (selectionChange)="setValues('view')">
+                    <mat-option [value]="null">--</mat-option>
+                    <mat-option [value]="3">3 months</mat-option>
+                    <mat-option [value]="6">6 months</mat-option>
+                    <mat-option [value]="12">12 months</mat-option>
+                    <mat-option [value]="18">18 months</mat-option>
+                    <mat-option [value]="24">24 months</mat-option>
+                    <mat-option [value]="36">36 months</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form__item form__input">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Year</mat-label>
+                <mat-select [formControl]="yearsControl" multiple (selectionChange)="setValues('years')">
+                    <mat-select-trigger>
+                        {{(yearsControl.value?.length || 0)}} {{'selected'}}
+                    </mat-select-trigger>
+                    @for (year of years | async; track year) {
+                    <mat-option [value]="year">{{year}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form__item form__input">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Accounts</mat-label>
+                <mat-select [formControl]="accountsControl" multiple (selectionChange)="setValues('accounts')">
+                    <mat-select-trigger>
+                        {{(accountsControl.value?.length || 0)}} {{'selected'}}
+                    </mat-select-trigger>
+                    @for (account of accounts | async; track account) {
+                    <mat-option [value]="account">{{account}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form__item form__input">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Banks</mat-label>
+                <mat-select [formControl]="banksControl" multiple (selectionChange)="setValues('banks')">
+                    <mat-select-trigger>
+                        {{(banksControl.value?.length || 0)}} {{'selected'}}
+                    </mat-select-trigger>
+                    @for (bank of banks | async; track bank) {
+                    <mat-option [value]="bank">{{bank | uppercase}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form__item form__input">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>Start</mat-label>
+                <input matInput #input>
+            </mat-form-field>
+        </div>
+        <div class="form__item form__input">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                <mat-label>End</mat-label>
+                <input matInput #input>
+            </mat-form-field>
+        </div>
+    </div>
+</div>

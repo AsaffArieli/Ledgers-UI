@@ -1,0 +1,14 @@
+<div class="profile">
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="false" mat-align-tabs="start">
+      @for (link of links; track link) {
+        <a mat-tab-link
+          [routerLink]="[link.path]"
+          routerLinkActive
+          #rla="routerLinkActive"
+          [active]="rla.isActive">{{link.path | uppercase}}</a>
+      }
+    </nav>
+    <mat-tab-nav-panel #tabPanel style="overflow-y: scroll;">
+      <router-outlet></router-outlet>
+    </mat-tab-nav-panel>
+</div>

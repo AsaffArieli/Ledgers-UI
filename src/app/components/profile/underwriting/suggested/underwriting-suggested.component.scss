@@ -1,0 +1,15 @@
+.underwriting-suggested {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 100%;
+    padding: 25px 12px 0;
+}
+
+.field {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px;
+    height: 35px;
+}

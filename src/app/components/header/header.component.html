@@ -1,0 +1,67 @@
+<div class="header">
+    <mat-toolbar>
+        <button (click)="sidebar.emit()" mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
+        <!--
+            <span>Ledgers</span>
+        -->
+        <span class="spacer"></span>
+        <form>
+            <mat-form-field subscriptSizing="dynamic">
+                <mat-label>Search</mat-label>
+                <input matInput type="text" aria-label="Number" [formControl]="formControl" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    @for (option of options | async; track option) {
+                    <mat-option [routerLink]="['/', option.class , option.id]">
+                        <div class="option">
+                            <span>{{ option.name }}</span>
+                            <span style="color: #a0a0a0;">{{ option.class.charAt(0).toUpperCase() }}{{ option.class.slice(1) }}</span>
+                        </div>
+                    </mat-option>
+                    }
+                </mat-autocomplete>
+            </mat-form-field>
+        </form>
+        <span class="spacer"></span>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>add_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" xPosition="before">
+            <button mat-menu-item>
+                <mat-icon>business_center</mat-icon>
+                <span>Deal</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>group</mat-icon>
+                <span>Lead</span>
+            </button>
+            <button mat-menu-item [matMenuTriggerFor]="database">
+                <mat-icon>business</mat-icon>
+                <span>Database</span>
+            </button>
+            <button mat-menu-item [matMenuTriggerFor]="parser">
+                <mat-icon>gesture</mat-icon>
+                <span>Parser</span>
+            </button>
+        </mat-menu>
+        <mat-menu #parser="matMenu">
+            <button mat-menu-item (click)="openForm('key')">Key</button>
+            <button mat-menu-item (click)="openForm('guideline')">Guideline</button>
+        </mat-menu>
+        <mat-menu #database="matMenu">
+            <button mat-menu-item (click)="openForm('merchant')">Merchant</button>
+            <button mat-menu-item (click)="openForm('owner')">Owner</button>
+            <button mat-menu-item (click)="openForm('funder')">Funder</button>
+        </mat-menu>
+        <button mat-icon-button>
+            <mat-icon>notifications</mat-icon>
+        </button>
+        <button mat-icon-button>
+            <mat-icon>settings</mat-icon>
+        </button>
+        <button mat-icon-button>
+            <mat-icon>account_circle</mat-icon>
+        </button>
+    </mat-toolbar>
+</div>

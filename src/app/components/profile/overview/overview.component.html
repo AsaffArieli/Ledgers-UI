@@ -1,0 +1,68 @@
+<div class="profile-overview">
+    <div class="profile-overview__img">
+        <mat-card>
+            <mat-card-content>
+                <img [src]="profileImage" class="profile-img">
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="profile-overview__content">
+        <mat-card>
+            <mat-card-content>
+                <table mat-table [dataSource]="info">
+                    <ng-container matColumnDef="category">
+                        <td mat-cell *matCellDef="let element">
+                            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                <input matInput type="text" [value]="element.category" [disabled]="true" />
+                            </mat-form-field>
+                        </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="value">
+                        <td mat-cell *matCellDef="let element">
+                            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                <input matInput type="text" [value]="element.value" />
+                            </mat-form-field>
+                        </td>
+                    </ng-container>
+    
+                    <tr mat-row *matRowDef="let row; columns: ['category', 'value'];"></tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+        <mat-card>
+            <mat-card-content>
+                <table mat-table [dataSource]="ownerships">
+                    @for (column of ownershipsColumns; track $index) {
+                    <ng-container [matColumnDef]="column">
+                        <td mat-cell *matCellDef="let element">
+                            @switch (column) {
+                            @case ('ownership') {
+                            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                <input matInput type="number" [value]="element[column]" />
+                            </mat-form-field>
+                            }
+                            @case ('link') {
+                                @if (class === 'merchant') {
+                                    <button mat-button [routerLink]="['/', 'owner', element.owner_id]"><mat-icon>arrow_forward</mat-icon></button>
+                                }
+                                @else if (class === 'owner') {
+                                    <button mat-button [routerLink]="['/', 'merchant', element.merchant_id]"><mat-icon>arrow_forward</mat-icon></button>
+                                }
+                            }
+                            @default {
+                            <mat-form-field appearance="outline" subscriptSizing="dynamic">
+                                <input matInput type="text" [value]="element[column]" [disabled]="true" />
+                            </mat-form-field>
+                            }
+                            }
+                        </td>
+                    </ng-container>
+                    }
+    
+                    <tr mat-row *matRowDef="let row; columns: ownershipsColumns;"></tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

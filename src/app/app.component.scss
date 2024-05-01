@@ -1,0 +1,24 @@
+* {
+    height: 100%;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+}
+
+header {
+    z-index: 10;
+    height: fit-content;
+}
+
+main {
+    overflow-y: hidden;
+}
+
+mat-drawer-content {
+    box-sizing: border-box;
+    padding: 9px 9px 0 9px;
+    overflow-y: hidden;
+}

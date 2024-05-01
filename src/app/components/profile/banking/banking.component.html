@@ -1,0 +1,70 @@
+<div class="banking">
+    <app-form-page>
+        <page-form>
+            <app-banking-form></app-banking-form>
+        </page-form>
+        <page-buttons-left>
+            <button mat-icon-button (click)="optionsToggle = !optionsToggle">
+                <mat-icon>filter_frames</mat-icon>
+            </button>
+        </page-buttons-left>
+        <page-buttons-right>
+            <div class="buttons">
+                <button mat-mini-fab matTooltip="Parse" class="buttons__button" (click)="fileInput.click()">
+                    <input type="file" multiple #fileInput style="display: none;">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <button mat-mini-fab matTooltip="Refresh" class="buttons__button">
+                    <mat-icon>refresh</mat-icon>
+                </button>
+                <button mat-mini-fab matTooltip="Export" class="buttons__button">
+                    <mat-icon>file_download</mat-icon>
+                </button>
+                <button mat-mini-fab matTooltip="Import" class="buttons__button">
+                    <mat-icon>import_export</mat-icon>
+                </button>
+                <button mat-mini-fab matTooltip="Delete" class="buttons__button">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-mini-fab matTooltip="More" class="buttons__button">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
+        </page-buttons-right>
+        <page-buttons-after>
+            <mat-card>
+                <mat-card-content>
+                    <mat-button-toggle-group>
+                        <mat-button-toggle [routerLink]="'./overview'" routerLinkActive #rlaOverview="routerLinkActive"
+                            [checked]="rlaOverview.isActive">Overview</mat-button-toggle>
+                        <mat-button-toggle [routerLink]="'./summary'" routerLinkActive #rlaStatements="routerLinkActive"
+                            [checked]="rlaStatements.isActive">Summary</mat-button-toggle>
+                    </mat-button-toggle-group>
+                </mat-card-content>
+            </mat-card>
+        </page-buttons-after>
+        <page-content-top *ngIf="optionsToggle">
+            <mat-card>
+                <mat-card-content>
+                    <div class="options">
+                        <mat-chip-listbox>
+                            <mat-chip-option #all color="primary">
+                                ALL
+                            </mat-chip-option>
+                        </mat-chip-listbox>
+                        <!--<mat-chip-listbox multiple #chips (change)="activate($event)">
+                            @for (statement of statements | async; track statement) {
+                            <mat-chip-option color="primary" [selected]="isSelected(statement)" [value]="statement">
+                                {{statement.date | date:'MMM-YY':'UTC'}}
+                            </mat-chip-option>
+                            }
+                        </mat-chip-listbox>-->
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </page-content-top>
+        <page-content>
+            <router-outlet></router-outlet>
+        </page-content>
+    </app-form-page>
+</div>

@@ -1,0 +1,53 @@
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    padding: 10px 0;
+}
+
+button {
+    width: 100%;
+    color: #374151;
+    font-family: Roboto, sans-serif;
+    font-size: 17px;
+    padding: 0 10px;
+}
+
+.mat-tree-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mat-tree-node-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; 
+}
+
+.tree-invisible {
+    display: none;
+  }
+  
+  .tree ul,
+  .tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+  }
+  
+  /*
+   * This padding sets alignment of the nested nodes.
+   */
+  .tree .mat-nested-tree-node div[role=group] {
+    padding-left: 0;
+  }
+  
+  /*
+   * Padding for leaf nodes.
+   * Leaf nodes need to have padding so as to align with other non-leaf nodes
+   * under the same parent.
+   */
+  .tree div[role=group] > .mat-tree-node .mat-tree-button {
+    padding-left: 20px;
+  }

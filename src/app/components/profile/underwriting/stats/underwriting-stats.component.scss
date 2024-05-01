@@ -1,0 +1,19 @@
+.underwriting-stats {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px 40px;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 1.3em;
+    gap: 11px;
+
+    &__title {
+        color: #666666bb;
+    }
+}

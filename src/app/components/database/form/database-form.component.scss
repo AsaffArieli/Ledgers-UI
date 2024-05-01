@@ -1,0 +1,28 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+
+    &__item {
+        height: fit-content;
+        width: fit-content;
+        margin: auto;
+    }
+
+    &__input {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &__buttons {
+        display: flex;
+        gap: 6px;
+        justify-content: center;
+    }
+
+    &__toggle {
+        padding-top: 15px;
+    }
+}

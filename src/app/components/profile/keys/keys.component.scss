@@ -1,0 +1,22 @@
+
+.keys {
+    height: 100%;
+}
+
+.buttons {
+    display: flex;
+    gap: 4px;
+
+    &__button {
+        box-shadow: none !important;
+    }
+}
+
+mat-card {
+    margin: 3px;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+}
+
+mat-card-content {
+    padding: 0 !important;
+}

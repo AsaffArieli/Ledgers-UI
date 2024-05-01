@@ -1,0 +1,57 @@
+.form-page {
+    height: 100%;
+}
+
+.layout {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+
+    &__toolbar {
+        height: fit-content;
+        display: flex;
+        justify-content: space-between;
+        gap: 3px;
+        z-index: 10;
+    }
+
+    &__buttons {
+        display: flex;
+        align-items: center;
+        padding-right: 5px;
+    }
+
+    &__content {
+        box-sizing: border-box;
+        flex: 1;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.drawer {
+    margin-right: 5px;
+}
+
+mat-card {
+    margin: 3px;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12) !important;
+}
+
+mat-card-content {
+    padding: 0 !important;
+}
+
+mat-drawer-container {
+    height: 100%;
+}
+
+mat-drawer {
+    background-color: transparent !important;
+    border: 0;
+}

@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; overflow: hidden !important; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.mat-mdc-option .mdc-list-item__primary-text {
+    width: 100%;
+}
+
+.header .mdc-line-ripple {
+    display: none;
+}
+
+.sidebar .mat-button-toggle-label-content {
+    width: 100%;
+    padding: 5px 16px;
+}
+
+.sidebar .mdc-button__label {
+    width: 100%;
+}
+
+.profile-overview .mat-mdc-table .mat-form-field-appearance-outline .mdc-notched-outline {
+    display: none !important;
+}
+
+.banking .mat-pseudo-checkbox {
+    display: none;
+}

@@ -1,0 +1,70 @@
+<mat-card>
+    <mat-card-content>
+        <table mat-table
+       [dataSource]="dataSource" multiTemplateDataRows
+       class="mat-elevation-z8">
+  @for (column of columns; track column) {
+    <ng-container matColumnDef="{{column}}">
+      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+    </ng-container>
+  }
+  <ng-container matColumnDef="expand">
+    <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+        @if (expandedElement === element) {
+          <mat-icon>keyboard_arrow_up</mat-icon>
+        } @else {
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        }
+      </button>
+    </td>
+  </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="columns.length">
+      <div class="example-element-detail"
+           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+           <div>
+            <br>
+            <mat-card>
+                <mat-card-content>
+                    <app-parser-settings [data]="element.settings"></app-parser-settings>
+                </mat-card-content>
+            </mat-card>
+            <br>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Parameters</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <app-parser-parameters [data]="element.parameters"></app-parser-parameters>
+                </mat-card-content>
+            </mat-card>
+            <br>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>Keys</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <app-parser-parameters [data]="element.keys"></app-parser-parameters>
+                </mat-card-content>
+            </mat-card>
+            <br>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr mat-row *matRowDef="let element; columns: columns;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+
+    </mat-card-content>
+</mat-card>
