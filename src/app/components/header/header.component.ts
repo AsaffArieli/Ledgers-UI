@@ -60,7 +60,7 @@ export class HeaderComponent {
 
 function _filter(filter: string, database: any[]): any[] {
   filter = filter ? filter.toLowerCase() : '';
-  return database ? database.filter(element =>
+  return database && filter !== '' ? database.filter(element =>
     (element.ein ? element.ein.toLowerCase().includes(filter) : false) ||
     (element.ssn ? element.ssn.toLowerCase().includes(filter) : false) ||
     (element.name ? element.name.toLowerCase().includes(filter) : false) ||
