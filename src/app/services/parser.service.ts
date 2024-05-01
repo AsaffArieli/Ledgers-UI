@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, distinctUntilChanged, filter, firstValueFr
 import { ParameterModel, ParserModel, SchemeModel } from '../models/parser';
 
 //const URL = "http://3.145.48.237:5000";
-const URL = "http://git-AsaffArieli.pythonanywhere.com";
+const URL = "https://git-AsaffArieli.pythonanywhere.com";
 const READ_PARSER_URL = `${URL}/read/parser`;
 const INSERT_PARAMETERS_URL = `${URL}/insert/parameters`;
 

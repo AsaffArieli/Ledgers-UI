@@ -6,7 +6,7 @@ import { FunderModel, MerchantModel, OwnerModel, ProfileModel } from '../models/
 import { FinancialsModel } from '../models/financials';
 
 //const URL = "http://3.145.48.237:5000";
-const URL = "http://git-AsaffArieli.pythonanywhere.com";
+const URL = "https://git-AsaffArieli.pythonanywhere.com";
 const READ_URL = `${URL}/read`;
 const DELETE_URL = `${URL}/delete`;
 const READ_FINANCIALS = `${URL}/read/financials`;

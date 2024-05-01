@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, distinctUntilChanged, filter, firstValueFr
 import { FunderModel, IDatabaseService, MerchantModel, OwnerModel, ProfileModel } from '../models/database';
 
 //const URL = "http://3.145.48.237:5000";
-const URL = "http://git-AsaffArieli.pythonanywhere.com";
+const URL = "https://git-AsaffArieli.pythonanywhere.com";
 const READ_URL = `${URL}/read`;
 const INSERT_URL = `${URL}/insert/database`;
 const DELETE_URL = `${URL}/delete`;
