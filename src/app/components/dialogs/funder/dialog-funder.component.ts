@@ -49,7 +49,7 @@ export class DialogFunderComponent {
         email: this.formGroup.controls.email.value
       }]
     }).then(() => {
-      this.database.readDatabase();
+      this.database.read();
       this.snackbar.open('Funder added', 'Dismiss', { duration: 5 * 1000 });
     });
   }

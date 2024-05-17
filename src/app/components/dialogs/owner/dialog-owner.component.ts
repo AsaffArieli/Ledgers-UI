@@ -60,7 +60,7 @@ export class DialogOwnerComponent {
         fico: this.formGroup.controls.fico.value
       }]
     }).then(() => {
-      this.database.readDatabase();
+      this.database.read();
       this.snackbar.open('Owner added', 'Dismiss', { duration: 5 * 1000 });
     });
   }

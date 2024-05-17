@@ -15,18 +15,34 @@ const READ_DATABASE_URL = `${URL}/read/database`;
 })
 export class DatabaseService {
 
+  /**
+   * RAM Memory for the service.
+   * @property BehaviorSubject<IDatabaseService>
+   */
   private databaseSubject = new BehaviorSubject<IDatabaseService>({
     merchants: [],
     owners: [],
     funders: [],
     selected: []
   });
+  /**
+   * Subscribable to service memory.
+   * @property Observable<IDatabaseService>
+   */
   private database$ = this.databaseSubject.asObservable();
 
+  /**
+   * Initial fetching of the database to RAM
+   * @constructor
+   */
   constructor(private http: HttpClient) {
-    this.readDatabase();
+    this.read();
   }
 
+  /**
+   * Gets the database interface.
+   * @return Observable<IDatabaseService>
+   */
   private get database(): Observable<IDatabaseService> {
     return this.database$.pipe(
       filter(database => !!database),
@@ -34,6 +50,10 @@ export class DatabaseService {
     );
   }
 
+  /**
+   * Gets the data for the main search form.
+   * @return Observable<ProfileModel[]>
+   */
   public get data(): Observable<ProfileModel[]> {
     return this.database.pipe(
       filter(database => !!database.merchants && !!database.owners && !!database.funders),
@@ -46,14 +66,10 @@ export class DatabaseService {
     );
   }
 
-  public get funders(): Observable<FunderModel[]> {
-    return this.database.pipe(
-      filter(database => !!database.funders),
-      distinctUntilChanged((prev, curr) => JSON.stringify(prev.funders) === JSON.stringify(curr.funders)),
-      map(database => database.funders)
-    );
-  }
-
+  /**
+   * Gets the selected elements.
+   * @return Observable<ProfileModel[]>
+   */
   public get selected(): Observable<ProfileModel[]> {
     return this.database.pipe(
       filter(database => !!database.selected),
@@ -62,18 +78,32 @@ export class DatabaseService {
     );
   }
 
+  /**
+   * Sets the selected elements.
+   * @param selected ProfileModel[]: new selected data.
+   */
   public set selected(selected: ProfileModel[]) {
     const database = this.databaseSubject.getValue();
     database.selected = selected;
     this.databaseSubject.next(database);
   }
 
+  /**
+   * Returns the correspondennce data table from RAM.
+   * @param table string: data table name to return. ['funders', 'merchants', 'owners']
+   * @returns Observable<ProfileModel[]>
+   */
   public dataStream(table: string): Observable<ProfileModel[]> {
     return this.database.pipe(
       map(database => database[table] ? database[table] : [])
     );
   }
 
+  /**
+   * Deletes the selected elements from database.
+   * Resolved when all elements are deleted.
+   * @returns Promise<void>
+   */
   public async delete(): Promise<void> {
     const items = await firstValueFrom(this.selected);
     console.log(items)
@@ -81,8 +111,13 @@ export class DatabaseService {
       firstValueFrom(this.http.delete<any>(`${DELETE_URL}/${item.class}/${item.id}`))
     ));
   }
-
-  public async readDatabase(): Promise<void> {
+  
+  /**
+   * Fetch the database from server to RAM.
+   * Resolved when all elements are fetched.
+   * @returns Promise<void>
+   */
+  public async read(): Promise<void> {
     try {
       const response = await firstValueFrom(this.http.get<any>(READ_DATABASE_URL));
       this.databaseSubject.next({
@@ -96,6 +131,12 @@ export class DatabaseService {
     }
   }
 
+  /**
+   * Insert data to database.
+   * Resolved when all data saved to database.
+   * @param body Objects to insert to database.
+   * @returns Promise<void>
+   */
   public async insert(body: any): Promise<void> {
     try {
       const response = await firstValueFrom(this.http.post<any>(INSERT_URL, body));

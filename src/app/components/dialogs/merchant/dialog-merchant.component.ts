@@ -60,7 +60,7 @@ export class DialogMerchantComponent {
         email: this.formGroup.controls.email.value,
       }]
     }).then(() => {
-      this.database.readDatabase();
+      this.database.read();
       this.snackbar.open('Merchant added', 'Dismiss', { duration: 5 * 1000 });
     });
   }

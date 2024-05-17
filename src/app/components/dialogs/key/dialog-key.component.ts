@@ -38,7 +38,7 @@ export class DialogKeyComponent {
   }
 
   get funders(): Observable<any[]> {
-    return this.databaseService.funders;
+    return this.databaseService.dataStream('funders');
   }
 
   public insert(): void {

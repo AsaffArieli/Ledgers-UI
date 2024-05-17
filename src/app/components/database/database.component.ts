@@ -25,10 +25,10 @@ export class DatabaseComponent {
   constructor(private databaseService: DatabaseService) {}
 
   public remove(): void {
-    this.databaseService.delete().then(() => this.databaseService.readDatabase());
+    this.databaseService.delete().then(() => this.databaseService.read());
   }
 
   public refresh(): void {
-    this.databaseService.readDatabase();
+    this.databaseService.read();
   }
 }
